@@ -51,14 +51,14 @@ func main() {
     done := make(chan bool)
     
     fmt.Println("Let's go for a walk!")
-    go delayed_task(tasks, done, Task{"Bob", "getting ready", 5, 10})
-    go delayed_task(tasks, done, Task{"Alice", "getting ready", 5, 10})
-
     go func() {
         for i := range tasks {
             fmt.Println(i)
         }
     }()
+    go delayed_task(tasks, done, Task{"Bob", "getting ready", 5, 10})
+    go delayed_task(tasks, done, Task{"Alice", "getting ready", 5, 10})
+
     
     for i := 0; i < 2; i++ {
         <-done
